@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
+
+
 
 let fetch;
 (async () => {
@@ -10,6 +13,8 @@ let fetch;
 const cron = require('node-cron');
 
 const app = express();
+app.use(cors());
+
 
 // Function to refresh Instagram access token
 async function refreshInstagramAccessToken() {
@@ -92,6 +97,10 @@ cron.schedule(cronExpression, async () => {
     } catch (error) {
         console.error('Error:', error);
     }
+});
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
 });
 
 const PORT = process.env.PORT || 3000;
