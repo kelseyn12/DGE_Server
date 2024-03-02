@@ -3,7 +3,16 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 
+const app = express();
 
+
+const corsOptions = {
+    origin: 'https://www.duluthgearexchange.com',
+    methods: ['GET', 'POST'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+};
+
+app.use(cors(corsOptions));
 
 let fetch;
 (async () => {
@@ -12,8 +21,7 @@ let fetch;
 })();
 const cron = require('node-cron');
 
-const app = express();
-app.use(cors());
+
 
 
 // Function to refresh Instagram access token
